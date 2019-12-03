@@ -22,11 +22,24 @@ text=t;
 
 digit = [0-9]
 letter =[a-zA-Z]
-special = [!@#$%^&*()_+]
 whitespace = [\t\n]
 quote = [\"]
-
-
+arithmetic = [+-*/%]
+lp = "("
+rp = ")"
+lcb = "{"
+rcb = "}"
+asst = "="
+keyword = "var"|"main"
+datatypes = "integer"|"char"|"string"|"float"
+inp = "input"
+out = "output"
+iff = "if"
+thenn = "then"
+elsee = "else"
+forr = "for"
+whilee = "while"
+logical = "||" | "&&" | "!" | "==" 
 
 %type Token
 %eofval{
@@ -35,8 +48,27 @@ return new Token(null);
 
 %%
 
-
+({letter}({letter}|{digit})*)  {System.out.println("Identifier "+yytext());}
 {quote}({letter}({letter}|{digit})*){quote}  {System.out.println("String "+yytext());}
 {digit}+ {System.out.println("Integer "+yytext());}
 {digit}+.{digit}+ {System.out.println("Float "+yytext());}
 [\n] {System.out.println("NL");}
+{keyword} {System.out.println("Keywords " + yytext());}
+{lp} {System.out.println("Left parenthesis " + yytext());}
+{lp} {System.out.println("Left parenthesis " + yytext());}
+{rcb} {System.out.println("Right Curly Braces " + yytext());}
+{lcb} {System.out.println("Left Curly Braces " + yytext());}
+{asst} {System.out.println("Assignment Operator " + yytext());}
+{datatypes} {System.out.println("Datatypes " + yytext());}
+{inp} {System.out.println("Input " + yytext());}
+{out} {System.out.println("Output " + yytext());}
+{iff} {System.out.println("IF " + yytext());}
+{thenn} {System.out.println("THEN " + yytext());}
+{elsee} {System.out.println("ELSE " + yytext());}
+{forr} {System.out.println("FOR " + yytext());}
+{logical} {System.out.println("Logical Operators " + yytext());}
+{whilee} {System.out.println("WHILE " + yytext());}
+
+
+
+
