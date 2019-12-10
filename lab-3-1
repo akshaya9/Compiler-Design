@@ -1,0 +1,74 @@
+package labsheet3;
+import java.util.*;
+
+public class RDParser {
+public static int index=0;
+public static char Token;
+public static String s;
+
+public static char getToken() 
+{
+	Token = s.charAt(index);
+	index++;
+	return Token;
+
+}
+
+public static boolean S() 
+{
+	int save =index;
+	if (getToken()=='a')
+		return true;
+	else 
+	{
+		index= save;
+		if (getToken()=='^')
+			return true;
+		else 
+		{
+			index= save;
+			if(getToken()=='(' && T() && getToken()==')')
+				return true;
+		}
+
+	}
+
+	index=save;
+	return false;
+
+}
+
+public static boolean T()
+{
+	int save =index;
+
+	if ( S() && TT()) 
+	{
+		return true;
+	}
+
+	index =save;
+	return false;
+}
+
+public static boolean TT() 
+{
+	int save =index;
+	if(getToken()==',' && S() && TT())
+		return true;
+	index =save;
+	return true;
+}
+
+
+
+public static void main(String[] args) 
+{
+	Scanner scan =new Scanner(System.in);
+	s = scan.nextLine();
+	if (S() && getToken()=='$')
+		System.out.println("Valid");
+	else
+		System.out.println("Invalid");
+}
+}
